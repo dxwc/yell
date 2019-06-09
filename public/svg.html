@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <title>🐠</title>
+    <style>
+        body { width: 100%; display: table; margin: 0 auto; overflow-x: hidden; }
+        textarea { margin: 1%; width: 98%; height: 50vh; }
+        button { margin-left: 1%; }
+    </style>
+</head>
+<body>
+<noscript>
+    This is a temprary solution. Unfortunately this will need javascript
+    to work. (Not a botnet, it will do things in your browser, nothing getting
+    sent back)
+</noscript>
+<textarea id='json' placeholder="enter the captcha json response here"></textarea>
+<div id='svg'></div>
+<br>
+<button id='press'>Show</button>
+<div id='info'></div>
+<script>
+    var json_node = document.getElementById('json');
+    var svg = document.getElementById('svg');
+    var info = document.getElementById('info');
+    var press = document.getElementById('press');
+
+    press.addEventListener('click', function()
+    {
+        try
+        {
+            info.innerHTML = '';
+            svg.innerHTML = JSON.parse(json_node.value.trim()).captcha_svg;
+            console.log(json_node.innerHTML);
+        }
+        catch(err)
+        {
+            console.log(err);
+            info.innerHTML = 'Something went wrong :(';
+        }
+    })
+</script>
+</body>
+</html>

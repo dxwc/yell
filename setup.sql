@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS post
+(
+    id        SERIAL PRIMARY KEY,
+    -- wrote     TEXT NOT NULL DEFAULT 'John Smith, PhD',
+    on_thread INTEGER NOT NULL,
+    content   TEXT NOT NULL,
+    created   TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS captcha
+(
+    id       TEXT NOT NULL,
+    solution TEXT NOT NULL,
+    created   TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE post
+ADD code TEXT NOT NULL DEFAULT '????';
+
+ALTER TABLE post
+ADD pic TEXT NOT NULL DEFAULT '';
+
+ALTER TABLE post
+RENAME COLUMN code TO delete_code;
+
+ALTER TABLE post
+DROP COLUMN wrote;
+
+ALTER TABLE post
+ADD bumped TIMESTAMP WITH TIME ZONE DEFAULT NOW();

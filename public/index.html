@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <title>🐠</title>
+    <style>
+        html, body, noscript
+        {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            left: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        body
+        {
+            padding: 2rem;
+        }
+        #running_script
+        {
+            text-align: center;
+        }
+        body, noscript
+        {
+            display: table;
+            margin: 0 auto;
+            text-align: left;
+        }
+        p
+        {
+            margin: 0;
+            padding: 0;
+        }
+        ul
+        {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .header
+        {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+
+        .footer
+        {
+            display: table;
+            margin: 0 auto;
+        }
+        .footer li
+        {
+            list-style: none;
+            display: inline;
+        }
+        .footer li a
+        {
+            text-decoration: none;
+            color: inherit;
+        }
+        .footer li a:hover
+        {
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <div class='header'>FRONTEND IS AN ILLUSION</div>
+    <p><b>GET</b> /page/&lt;page number&gt;
+        <ul>
+            <li>0 indexed, upto 9</li>
+            <li>Cached for 30 seconds</li>
+            <li>Default order is by bump</li>
+            <li>?by_time=1 to order by thread create time</li>
+        </ul>
+    <p><b>GET</b> /post/&lt;id&gt;
+        <ul>
+            <li><b>on_thread</b> is -1 if it is a thread post</li>
+        </ul>
+    </p>
+    <p><b>GET</b> /captcha</p>
+    <p>
+        <b>POST</b> /post
+        <ul>
+            <li>Content-Type: application/json; charset=utf-8</li>
+            <li>
+                    Body:<br>
+                    {<br>
+                        &emsp;<b>content</b>: &lt;post content&gt;,<br>
+                        &emsp;<b>captcha_id</b>: &lt;return as sent&gt;,<br>
+                        &emsp;<b>captcha_solution</b>: &lt;solution&gt;,<br>
+                        &emsp;<b>on_thread</b>: &lt;id of the thread to comment on&gt;,<br>
+                        &emsp;<b>pic</b>: &lt;direct external image link&gt;<br>
+                    }
+                    <ul>
+                        <li><b>content</b>, <b>captcha_id</b> and <b>captcha_solution</b> are required</li>
+                        <li><b>on_thread</b> is required if commenting on a thread</li>
+                        <li>Currently <b>pic</b> only supports these URL formats:
+                            <ul>
+                                <li>https://i.imgur.com/...</li>
+                                <li>https://i.postimg.cc/...</li>
+                                <li>Should I add something else ? /contact.txt</li>
+                            </ul>
+                        </li>
+                    </ul>
+            </li>
+            <li>On wrong captcha solution, returns content and new captcha</li>
+            <li>
+                On success, returns post id, delete code and captcha for future use
+            </li>
+            <li>
+                Threads that goes past page 9 in bump order will be deleted
+            </li>
+        </ul>
+    </p>
+    <p>
+        <b>POST</b> /delete
+        <ul>
+            <li>
+                    Body:
+                    {
+                        <b>id</b>: &lt;post id to delete&gt;,
+                        <b>delete_code</b>: &lt;delete code&gt;
+                    }
+            </li>
+            <li>
+                On success, will return the <i>deleted</i> id
+            </li>
+
+        </ul>
+    </p>
+    <p>Results are XSS sanitized but not fully tested</p>
+    <br>
+    <br>
+    <br>
+    <div class='footer'>
+        <li><a href='/rules.txt'>Rules</a></li>
+        <li><a href='/privacy.txt'>Privacy Policy</a></li>
+        <li><a href='/terms.txt'>Terms and Condition</a></li>
+        <li><a href='/contact.txt'>Contact</a></li>
+    </div>
+</noscript>
+<h3 id='running_script' style='display: none'></h3>
+<script>
+    document.addEventListener('DOMContentLoaded', () =>
+    {
+        var rs = document.getElementById('running_script');
+        rs.innerHTML =
+        'Turn <b>off</b> JavaScript and reload this page to see How-To';
+        rs.removeAttribute('style');
+    });
+</script>
+</body>
+</html>
